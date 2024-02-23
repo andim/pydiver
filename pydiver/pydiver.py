@@ -64,7 +64,7 @@ def varpc_sample(sample, **kwargs):
  
     return varpc(counts_from_sample(sample), **kwargs)
 
-def varpc(n, method='unbiased', bootnum=100):
+def varpc(n, method='unbiased', bootnum=200, poisson_bound=False):
     """Estimate variance of Simpson's index from sample counts.
 
     n: array-like
@@ -72,16 +72,19 @@ def varpc(n, method='unbiased', bootnum=100):
         n_i = number of counts of the ith species
 
     method: string
-        one of 'unbiased', 'plugin', 'grundmann', 'chao'
+        one of 'unbiased', 'plugin', 'grundmann', 'chao', 'shrinkage'
 
     bootnum: int
         number of bootstrap samples (if method='chao')
+
+    poisson_bound : boolean
+        use Poisson variance as bound (if method='unbiased')
 
     """
     n = np.asarray(n)
     N = np.sum(n)
 
-    if method == 'unbiased':
+    if (method == 'unbiased') or (method == 'shrinkage'):
         n = n[n>0]
         p2_hat = np.sum(n*(n-1))/(N*(N-1))
         p3_hat = np.sum(n*(n-1)*(n-2))/(N*(N-1)*(N-2))
@@ -90,6 +93,15 @@ def varpc(n, method='unbiased', bootnum=100):
                - beta*p2_hat**2
                + 2/(N*(N-1))*(1+beta)*p2_hat
                )
+        var_poisson = 2/(N*(N-1))*p2_hat
+        if method == 'shrinkage':
+            triple_coincidences = np.sum(n*(n-1)*(n-2))/6
+            kappa = 2.0/triple_coincidences
+            w = min(1.0, kappa/(1+kappa))
+            print(w, triple_coincidences)
+            return w*var_poisson + (1-w)*var
+        if poisson_bound and (var<var_poisson):
+            return var_poisson
         return var
     elif method == 'plugin':
         p = n/N
