@@ -26,13 +26,13 @@ CLASSIFIERS = ["Development Status :: 5 - Production/Stable",
                "Topic :: Scientific/Engineering"]
 
 # Description should be a one-liner:
-description = "Pydiver - ecological diversity analysis in Python" 
+description = "Pydiver: ecological diversity analysis in Python" 
 # Long description will go up on the pypi page
 long_description = """
-Pydiver - ecological diversity analysis in Python
+PyDiver: ecological diversity analysis in Python
 """
 
-NAME = "pydiver"
+NAME = "python-diver"
 MAINTAINER = "Andreas Tiffeau-Mayer"
 MAINTAINER_EMAIL = "andimscience@gmail.com"
 DESCRIPTION = description
