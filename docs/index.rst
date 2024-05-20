@@ -16,6 +16,5 @@ For API documentation see below:
 
 .. toctree::
    :maxdepth: 2
-    
-.. automodule:: pyrepseq
-   :members:
+
+   api
