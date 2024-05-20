@@ -72,7 +72,7 @@ def varpc(n, method='unbiased', bootnum=200, poisson_bound=False):
         n_i = number of counts of the ith species
 
     method: string
-        one of 'unbiased', 'plugin', 'grundmann', 'chao', 'shrinkage'
+        one of 'unbiased', 'plugin', 'grundmann', 'chao', 'shrinkage', 'poisson'
 
     bootnum: int
         number of bootstrap samples (if method='chao')
@@ -87,13 +87,15 @@ def varpc(n, method='unbiased', bootnum=200, poisson_bound=False):
     if (method == 'unbiased') or (method == 'shrinkage'):
         n = n[n>0]
         p2_hat = np.sum(n*(n-1))/(N*(N-1))
+        var_poisson = 2/(N*(N-1))*p2_hat
+        if method == 'poisson':
+            return var_poisson
         p3_hat = np.sum(n*(n-1)*(n-2))/(N*(N-1)*(N-2))
         beta = 2*(2*N-3)/((N-2)*(N-3))
         var = (4*(N-2)/(N*(N-1))*(1+beta)*p3_hat
                - beta*p2_hat**2
                + 2/(N*(N-1))*(1+beta)*p2_hat
                )
-        var_poisson = 2/(N*(N-1))*p2_hat
         if method == 'shrinkage':
             triple_coincidences = np.sum(n*(n-1)*(n-2))/6
             kappa = 2.0/triple_coincidences
