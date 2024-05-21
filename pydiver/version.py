@@ -22,14 +22,15 @@ CLASSIFIERS = ["Development Status :: 5 - Production/Stable",
                "License :: OSI Approved :: MIT License",
                "Operating System :: OS Independent",
                "Programming Language :: Python :: 3",              
-               "Programming Language :: Python :: 3.8",
                "Topic :: Scientific/Engineering"]
 
 # Description should be a one-liner:
 description = "Pydiver: ecological diversity analysis in Python" 
 # Long description will go up on the pypi page
 long_description = """
-PyDiver: ecological diversity analysis in Python
+# PyDiver: ecological diversity analysis in Python
+
+PyDiver is a lightweight software package for calculating Simpson diversity with error bars.
 """
 
 NAME = "python-diver"
@@ -48,4 +49,4 @@ MINOR = _version_minor
 MICRO = _version_micro
 VERSION = __version__
 PACKAGES = ['pydiver']
-REQUIRES = ["numpy", "scipy"]
+REQUIRES = ["numpy"]
