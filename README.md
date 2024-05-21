@@ -7,3 +7,7 @@
 
 PyDiver is a lightweight software package for calculating Simpson diversity with error bars.
 
+
+Install this package using:
+
+`pip install python-diver`
