@@ -1,5 +1,4 @@
 import numpy as np
-import scipy.stats
 
 def counts_from_sample(sample):
     return np.unique(sample, return_counts=True)[1]
