@@ -83,7 +83,7 @@ def varpc(n, method='unbiased', bootnum=200, poisson_bound=False):
     n = np.asarray(n)
     N = np.sum(n)
 
-    if (method == 'unbiased') or (method == 'shrinkage'):
+    if method in ['unbiased', 'shrinkage', 'poisson']:
         n = n[n>0]
         p2_hat = np.sum(n*(n-1))/(N*(N-1))
         var_poisson = 2/(N*(N-1))*p2_hat
