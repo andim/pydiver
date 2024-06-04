@@ -1,6 +1,7 @@
 import numpy as np
 
 def counts_from_sample(sample):
+    """Calculate a list of counts of unique elements"""
     return np.unique(sample, return_counts=True)[1]
 
 def pc_population(p):
